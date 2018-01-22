@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.ibm.mq">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/SUGAR INSTALLATION/com.ibm.mq.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/SUGAR INSTALLATION/com.ibm.mq.jmqi.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/SUGAR INSTALLATION/com.ibm.mq.headers.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/SUGAR INSTALLATION/com.ibm.mq.jmqi.jar!/" />
+    </SOURCES>
+  </library>
+</component>

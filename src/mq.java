@@ -81,4 +81,27 @@ public class mq {
 
     }
 
+
+    public int check_depth(){
+
+        try{
+
+            MQQueueManager qm = new MQQueueManager(queuemanager);
+
+            //QUEUEMANAGER OPEN OPTION FOR INPUT(GET MESSAGE) & INQUIRE(TO CHECK DEPTH)
+            int openOptionArg = CMQC.MQOO_INPUT_AS_Q_DEF|CMQC.MQOO_INQUIRE; //INQUIRE for checking depth
+            MQQueue q = qm.accessQueue(queue,openOptionArg);
+
+            int depth = q.getCurrentDepth();
+
+            return depth;
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }

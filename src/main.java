@@ -6,22 +6,26 @@ import java.util.Properties;
 public class main {
 
     private static String hostname,port,userID,password,channel,queuemanager,queue;
-    private static String propertyfilename, operation;
+    private static String propertyfilename, operation, put_data;
 
 
     public static void main(String[] args) throws Exception{
 
         if(args.length == 0){
             System.out.println("Please input propertyfilename & operation as commandline input");
-            System.out.println("operation can be \"put\" or \"check_depth\" or \"get_first\"");
+            System.out.println("operation can be \"put_data\" or \"check_depth\" or \"get_first\"");
             System.out.println("example usage : java main conf.ini check_depth");
+            System.out.println("example usage : java main conf.ini get_first");
+            System.out.println("example usage : java main conf.ini put_data \"<input message>\"");
 
             System.exit(0);
         }
         if(args.length == 1){
             System.out.println("You entered property file name only, Please input propertyfilename & operation as commandline input");
-            System.out.println("operation can be \"put\" or \"check_depth\" or \"get_first\"");
+            System.out.println("operation can be \"put_data\" or \"check_depth\" or \"get_first\"");
             System.out.println("example usage : java main conf.ini check_depth");
+            System.out.println("example usage : java main conf.ini get_first");
+            System.out.println("example usage : java main conf.ini put_data \"<input message>\"");
 
             java.io.File file = new java.io.File(args[0]);
             if (!file.exists()){
@@ -34,6 +38,7 @@ public class main {
 
         propertyfilename = args[0];
         operation = args[1];
+
 
         try{
 
@@ -59,10 +64,20 @@ public class main {
             mq mq = new mq(hostname,port,userID,password,channel,queuemanager,queue);
 
 
-            if(operation.equals("put")){
+            if(operation.equals("put_data")){
 
+                if(args.length != 3){
+                    System.out.println("you have selected put_data...but have not given the input data");
+
+                    System.out.println("example usage : java main conf.ini put_data \"<input message>\"");
+
+                    System.exit(0);
+                }
+                put_data=args[2];
+
+               
                 //PUT MESSAGE IN QUEUE
-                mq.put_message_data("3");
+                mq.put_message_data(put_data);
 
             }
 

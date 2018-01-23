@@ -65,7 +65,7 @@ public class mq {
         try{
 
             MQQueueManager qm = new MQQueueManager(queuemanager);
-            int openOptionArg = CMQC.MQOO_BROWSE|CMQC.MQOO_INPUT_AS_Q_DEF|CMQC.MQOO_OUTPUT|CMQC.MQOO_INQUIRE; //THESE MANY OPEN OPTION IS PROBABLY NOT NEEDE
+            int openOptionArg = CMQC.MQOO_BROWSE|CMQC.MQOO_INPUT_AS_Q_DEF|CMQC.MQOO_OUTPUT|CMQC.MQOO_INQUIRE; //THESE MANY OPEN OPTION IS PROBABLY NOT NEEDED
             MQQueue q = qm.accessQueue(queue,openOptionArg);
 
             MQMessage msg = new MQMessage();

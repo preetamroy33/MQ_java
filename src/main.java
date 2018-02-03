@@ -18,7 +18,7 @@ public class main {
             System.out.println("example usage : java main conf.ini get_first");
             System.out.println("example usage : java main conf.ini put_data \"<input message>\"");
 
-            System.exit(0);
+            System.exit(1);
         }
         if(args.length == 1){
             System.out.println("You entered property file name only, Please input propertyfilename & operation as commandline input");
@@ -33,7 +33,7 @@ public class main {
 
             }
 
-            System.exit(0);
+            System.exit(1);
         }
 
         propertyfilename = args[0];

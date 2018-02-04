@@ -39,12 +39,10 @@ public class main {
         propertyfilename = args[0];
         operation = args[1];
 
-
         try{
 
             Properties prop = new Properties();
             InputStream input = null;
-
 
             input = new FileInputStream(propertyfilename);
 
@@ -59,9 +57,13 @@ public class main {
             queuemanager=prop.getProperty("queuemanager");
             queue=prop.getProperty("queue");
 
-
-
             mq mq = new mq(hostname,port,userID,password,channel,queuemanager,queue);
+
+            if(operation.equals("check_depth")){
+
+                int depth = mq.check_depth();
+                write("queue_depth",Integer.toString(depth));
+            }
 
 
             if(operation.equals("put_data")){
@@ -71,21 +73,16 @@ public class main {
 
                     System.out.println("example usage : java main conf.ini put_data \"<input message>\"");
 
-                    System.exit(0);
+                    System.exit(1);
                 }
                 put_data=args[2];
 
-               
+
                 //PUT MESSAGE IN QUEUE
                 mq.put_message_data(put_data);
 
             }
 
-            if(operation.equals("check_depth")){
-
-                int depth = mq.check_depth();
-                write("queue_depth",Integer.toString(depth));
-            }
 
             if(operation.equals("get_first")){
 

@@ -17,8 +17,28 @@ public class mq {
 
         this.queuemanager = queuemanager;
         this.queue = queue;
+    }
 
+    public int check_depth(){
 
+        try{
+            MQQueueManager qm = new MQQueueManager(queuemanager);
+
+            //QUEUEMANAGER OPEN OPTION FOR INPUT(GET MESSAGE) & INQUIRE(TO CHECK DEPTH)
+            int openOptionArg = CMQC.MQOO_INPUT_AS_Q_DEF|CMQC.MQOO_INQUIRE; //INQUIRE for checking depth
+            MQQueue q = qm.accessQueue(queue,openOptionArg);
+
+            int depth = q.getCurrentDepth();
+
+            q.close();
+            qm.disconnect();
+
+            return depth;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 
@@ -42,6 +62,9 @@ public class mq {
 
                 //MSG IS UPDATED WITH THE MSG RETRIEVED FROM QUEUE
                 q.get(msg,gmo);
+
+                q.close();
+                qm.disconnect();
 
                 return msg;
             }
@@ -72,6 +95,8 @@ public class mq {
             msg.writeString(data); //ADD CONTENT TO MSG-DATA
             q.put(msg); //PUT MSG IN QUEUE
 
+            q.close();
+            qm.disconnect();
 
 
         }
@@ -82,26 +107,6 @@ public class mq {
     }
 
 
-    public int check_depth(){
 
-        try{
-
-            MQQueueManager qm = new MQQueueManager(queuemanager);
-
-            //QUEUEMANAGER OPEN OPTION FOR INPUT(GET MESSAGE) & INQUIRE(TO CHECK DEPTH)
-            int openOptionArg = CMQC.MQOO_INPUT_AS_Q_DEF|CMQC.MQOO_INQUIRE; //INQUIRE for checking depth
-            MQQueue q = qm.accessQueue(queue,openOptionArg);
-
-            int depth = q.getCurrentDepth();
-
-            return depth;
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return 0;
-    }
 
 }

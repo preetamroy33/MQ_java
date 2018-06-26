@@ -62,7 +62,8 @@ public class main {
             if(operation.equals("check_depth")){
 
                 int depth = mq.check_depth();
-                write("queue_depth",Integer.toString(depth));
+                //write("queue_depth",Integer.toString(depth));
+                System.out.println(depth);
             }
 
 
@@ -93,7 +94,8 @@ public class main {
             int msg_length = msg.getMessageLength();
             String msg_data = msg.readStringOfByteLength(msg_length);
 
-            write("msg.xml",msg_data);
+            //write("msg.xml",msg_data);
+                System.out.println(msg_data);
             }
 
 
